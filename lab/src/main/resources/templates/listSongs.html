@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #cccccc;
+            color: #000000;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid #aaaaaa;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #aaaaaa; /* Потемна сива боја при hover */
+            color: #ffffff; /* Бел текст при hover */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <div>
+        <h2>Choose a song:</h2>
+
+
+        <form action="/artist" method="get">
+            <div th:each="song:${songs}">
+                <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:text="|Title: ${song.getTitle()}, Genre: ${song.getGenre()}, Release Year: ${song.getReleaseYear()}, Album: ${song.getAlbum().getName()}, Rating: ${song.calculateRating()}|"> <br/>
+                <a class="button" th:href="@{/songs/edit/{id} (id=${song.id})}">Edit</a>
+                <a class="button" th:href="@{/songs/delete/{id} (id=${song.id})}">Delete</a>
+            </div>
+            <input type='submit' value='Submit'>
+        </form>
+    </div>
+
+    <div>
+        <h3>Add Song</h3>
+        <a class="button" href="/songs/add">Add a new song</a>
+    </div>
+
+<div>
+    <h3>Rate Songs</h3>
+
+    <form action="/rateSongs" method="post">
+        <div th:each="song:${songs}">
+            <label th:text="|Title: ${song.getTitle()}, Rating: ${song.calculateRating()}|">
+            </label>
+            <input type="number" min="1" max="5" name="addRating">
+            <br/>
+            <input type="hidden" name="trackIdForRating" th:value="${song.getTrackId()}">
+            <input type='submit' value='Rate song'>
+        </div>
+
+    </form>
+</div>
+
+</main>
+</body>
+</html>
