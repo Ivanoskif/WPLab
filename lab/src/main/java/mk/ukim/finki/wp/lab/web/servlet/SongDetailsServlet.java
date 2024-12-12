@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "SongDetailsServlet", value = "/songDetails")
+@WebServlet(name = "SongDetailsServlet", value = "/servlet/songDetails")
 public class SongDetailsServlet extends HttpServlet {
 
     private final SongServiceImpl songService;

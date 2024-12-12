@@ -35,7 +35,7 @@
     <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
 
 
-    <form action="/songDetails" method="get">
+    <form th:action="@{/songDetails}" method="get">
 
         <div th:each="artist:${artists}">
             <input type="radio" name="artistId" th:value="${artist.getId()}" th:text="|${artist.getFirstName()} ${artist.getLastName()}, Biography: ${artist.getBio()}|" ><br/>

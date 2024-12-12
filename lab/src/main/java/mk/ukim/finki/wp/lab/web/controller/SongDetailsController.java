@@ -23,21 +23,21 @@ public class SongDetailsController {
 
     @GetMapping
     public String getSongDetailPage(@RequestParam(required = false) String error,
-                                    @RequestParam() String trackId,
-                                    @RequestParam() String artistId,
+                                    @RequestParam() Long trackId,
+                                    @RequestParam() Long artistId,
                                     Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
 
-        Song song = songService.findByTrackId(trackId.split(",")[0]);
+        Song song = songService.getSongById(trackId);
 
         if (song == null) {
             return "redirect:/songDetails?error=SongNotFound";
         }
 
-        Artist artist = artistService.ArtistfindById(Long.valueOf(artistId));
+        Artist artist = artistService.ArtistfindById(artistId);
 
         if (artist != null) {
             songService.addArtistToSong(artist, song);

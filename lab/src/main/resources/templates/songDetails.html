@@ -3,6 +3,33 @@
     <meta charset="utf-8">
     <title>Song Details</title>
 
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #cccccc;
+            color: #000000;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid #aaaaaa;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #aaaaaa; /* Потемна сива боја при hover */
+            color: #ffffff; /* Бел текст при hover */
+        }
+    </style>
+
 </head>
 <body>
 
@@ -20,6 +47,8 @@
         <li th:text="|${artist.getFirstName()} ${artist.getLastName()}|"></li>
     </ul>
 </section>
+
+<a href="/songs" class="button">List songs</a>
 
 </body>
 </html>

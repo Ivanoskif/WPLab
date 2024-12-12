@@ -13,7 +13,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "SongListServlet", value = "/listSongs")
+@WebServlet(name = "SongListServlet", value = "/servlet/listSongs")
 public class SongListServlet extends HttpServlet {
 
     private final SongServiceImpl songService;

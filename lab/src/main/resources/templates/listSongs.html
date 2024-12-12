@@ -37,37 +37,67 @@
     <div>
         <h2>Choose a song:</h2>
 
+<!--        <form action="/songs" method="get">-->
+<!--            <label>List songs by genre</label>-->
+<!--            <select id="genre" name="genre">-->
+<!--                <option>All songs</option>-->
+<!--                <option th:each="genre : ${genres}"-->
+<!--                        th:value="${genre}"-->
+<!--                        th:text="${genre}"></option>-->
+<!--            </select>-->
+<!--            <input type='submit' value='Submit'>-->
+
+<!--        </form>-->
+
+        <form action="/songs" method="get">
+            <label>List songs by album</label>
+            <select id="album" name="albumId">
+                <option>All songs</option>
+                <option th:each="album : ${albums}"
+                        th:value="${album.getId()}"
+                        th:text="${album.getName()}"></option>
+            </select>
+            <input type='submit' value='Submit'>
+
+        </form>
 
         <form action="/artist" method="get">
-            <div th:each="song:${songs}">
-                <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:text="|Title: ${song.getTitle()}, Genre: ${song.getGenre()}, Release Year: ${song.getReleaseYear()}, Album: ${song.getAlbum().getName()}, Rating: ${song.calculateRating()}|"> <br/>
-                <a class="button" th:href="@{/songs/edit/{id} (id=${song.id})}">Edit</a>
-                <a class="button" th:href="@{/songs/delete/{id} (id=${song.id})}">Delete</a>
+            <div th:each="song:${songs}" style="margin-top: 10px">
+                <input type="radio" name="trackId" th:value="${song.getId()}" th:text="|Title: ${song.getTitle()}, Genre: ${song.getGenre()}, Release Year: ${song.getReleaseYear()}, Album: ${song.getAlbum().getName()}, Rating: ${song.getRating()}|">
+<!--                <input type="number" name="rating" min="1" max="5" step="1" th:id="rating">-->
+<!--                <a th:href="@{/artist/addRating/{id} (id=${song.id})}" class="button">Add rating</a>-->
+                <br/>
+                <a class="button" th:href="@{/songs/edit/{id} (id=${song.id})}" style="margin-top: 5px">Edit</a>
+                <a class="button" th:href="@{/songs/delete/{id} (id=${song.id})}" style="margin-top: 5px">Delete</a>
             </div>
-            <input type='submit' value='Submit'>
+            <input type='submit' value='Submit' style="margin-top: 10px">
         </form>
     </div>
 
     <div>
-        <h3>Add Song</h3>
-        <a class="button" href="/songs/add">Add a new song</a>
+        <h2>Add Song</h2>
+        <a class="button" href="/songs/add" >Add a new song</a>
     </div>
 
 <div>
-    <h3>Rate Songs</h3>
+    <h2>Rate Songs</h2>
 
-    <form action="/rateSongs" method="post">
-        <div th:each="song:${songs}">
+    <form action="/songs/addRating" method="post" th:each="song:${songs}">
+
+<!--        <div th:each="song:${songs}">-->
             <label th:text="|Title: ${song.getTitle()}, Rating: ${song.calculateRating()}|">
             </label>
             <input type="number" min="1" max="5" name="addRating">
             <br/>
-            <input type="hidden" name="trackIdForRating" th:value="${song.getTrackId()}">
+            <input type="hidden" name="trackIdForRating" th:value="${song.getId()}">
             <input type='submit' value='Rate song'>
-        </div>
+<!--        </div>-->
 
     </form>
+
 </div>
+
+
 
 </main>
 </body>
