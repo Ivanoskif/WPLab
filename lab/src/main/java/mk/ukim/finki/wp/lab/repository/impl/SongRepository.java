@@ -73,7 +73,10 @@ public class SongRepository {
         }
     }
 
-
+    public List<Song> findByGenre(String genre){
+        return this.songList.stream()
+                .filter(song -> song.getGenre().equals(genre)).toList();
+    }
 
 
 }
